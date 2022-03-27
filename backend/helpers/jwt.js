@@ -7,6 +7,7 @@ function authJwt() {
 
   const publicProductsUrl = pathToRegexp(`${api}/products(.*)`);
   const publicCategoriesUrl = pathToRegexp(`${api}/categories(.*)`);
+  const publicUploadsUrl = pathToRegexp(`/public/uploads(.*)`);
 
   return expressJwt({
     secret,
@@ -14,6 +15,7 @@ function authJwt() {
     isRevoked: isRevokedCallback,
   }).unless({
     path: [
+      { url: publicUploadsUrl, methods: ['GET', 'OPTIONS'] },
       { url: publicProductsUrl, methods: ['GET', 'OPTIONS'] },
       { url: publicCategoriesUrl, methods: ['GET', 'OPTIONS'] },
       `${api}/users/login`,

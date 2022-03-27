@@ -26,6 +26,7 @@ app.use(cors());
 //enable pre-flight across-the-board like so:
 app.options('*', cors());
 app.use(authJwt());
+app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 app.use(errorHandler);
 
 // Routers
